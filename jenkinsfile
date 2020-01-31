@@ -6,13 +6,13 @@ pipeline{
     agent none
     stages{
         stage('Checkout'){
-            agent {label 'win_slave'}
+            agent {label 'winslave'}
             steps{
                 git 'https://github.com/Nivedita-pusuluri/devopstrainee-remoterepo.git'
             }
         }
         stage('Complile'){
-            agent {label 'win_slave'}
+            agent {label 'winslave'}
             steps{
                 bat 'mvn compile'
             }

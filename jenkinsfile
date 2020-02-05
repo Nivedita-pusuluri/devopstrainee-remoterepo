@@ -47,19 +47,8 @@ pipeline{
         }
         stage('deploy'){
            steps{
-                rm -rf jenkins-docker
-                mkdir jenkins-docker
-                cd jenkins-docker
-                cp /var/lib/jenkins/workspace/Package/target/addressbook.war .
-                touch dockerfile
-                cat <<EOT>> dockerfile
-                From tomcat
-                ADD addressbook.war /usr/local/tomcat/webapps
-                CMD "catalina.sh" "run"
-                EXPOSE 8080
-                EOT
-                sudo docker build -t deploy:$BUILD_NUMBER .
-                sudo docker run -itd -P deploy:$BUILD_NUMBER
+                sh 'mvn deploy'
+                
                 }
            }    
       }   
